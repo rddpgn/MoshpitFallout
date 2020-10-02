@@ -1,6 +1,7 @@
 import { GameEngineFacade } from './GameEngineFacade';
 import { GameObjectsController } from './gameObjects/GameObjectsController';
-import { Renderer } from './Renderer';
+import { Renderer } from './graphics/Renderer';
+import { ResourceManager } from './ResourceManager';
 
 export class GameEngine {
     private static instance:GameEngine;
@@ -8,6 +9,7 @@ export class GameEngine {
     private canvas:HTMLCanvasElement;
     private gameObjectsController:GameObjectsController;
     private renderer:Renderer;
+    private resourseManager:ResourceManager;
     
     
     private constructor(canvas:HTMLCanvasElement, ctx:CanvasRenderingContext2D) {
@@ -18,6 +20,7 @@ export class GameEngine {
 
         this.gameObjectsController = new GameObjectsController();
         this.renderer = new Renderer(ctx);
+        this.resourseManager = new ResourceManager();
 
         this.update();
     }

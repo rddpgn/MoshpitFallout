@@ -1,5 +1,5 @@
-import { GameEngineFacade } from "./GameEngineFacade";
-import { GameObject } from "./gameObjects/GameObject";
+import { GameEngineFacade } from "../GameEngineFacade";
+import { GameObject } from "../gameObjects/GameObject";
 
 export class Renderer {
 
