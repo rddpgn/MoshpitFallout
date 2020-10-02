@@ -1,4 +1,4 @@
-import * as gameEngineModule from './engine/GameEngine';
+import { GameEngine } from './engine/GameEngine';
 
 const config = {
     canvasId: 'game-canvas',
@@ -12,7 +12,7 @@ const startGame:Function = function():void {
     gameCanvas.height = config.canvasHeight;
 
     const gameCanvasContext:CanvasRenderingContext2D = gameCanvas.getContext('2d');
-    gameEngineModule.GameEngine.start(gameCanvasContext);
+    GameEngine.start(gameCanvas, gameCanvasContext);
 }
 
 startGame();

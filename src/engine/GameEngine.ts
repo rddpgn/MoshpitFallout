@@ -1,26 +1,45 @@
+import { GameEngineFacade } from './GameEngineFacade';
+import { GameObjectsController } from './gameObjects/GameObjectsController';
+import { Renderer } from './Renderer';
+
 export class GameEngine {
     private static instance:GameEngine;
-    private ctx:CanvasRenderingContext2D;
-
-    private constructor(ctx:CanvasRenderingContext2D) {
+    
+    private canvas:HTMLCanvasElement;
+    private gameObjectsController:GameObjectsController;
+    private renderer:Renderer;
+    
+    
+    private constructor(canvas:HTMLCanvasElement, ctx:CanvasRenderingContext2D) {
         GameEngine.instance = this;
-        this.ctx = ctx;
-        
-        this.drawSmth();
+        new GameEngineFacade(this);
+
+        this.canvas = canvas;
+
+        this.gameObjectsController = new GameObjectsController();
+        this.renderer = new Renderer(ctx);
+
+        this.update();
     }
 
-    public static start(ctx:CanvasRenderingContext2D) {
-        if (GameEngine.instance == undefined) {
-            GameEngine.instance = new GameEngine(ctx);
+    public static start(canvas:HTMLCanvasElement, ctx:CanvasRenderingContext2D):void {
+        if (this.instance == undefined) {
+            this.instance = new GameEngine(canvas, ctx);
         }
     }
 
-    public static getInstance():GameEngine {
-        return this.instance;
+    private update():void {
+        this.gameObjectsController.updateGameObjects();
+        this.renderer.renderGameObjects(this.gameObjectsController.getGameObjectsSet());
+
+        window.requestAnimationFrame(this.update.bind(this));
     }
 
-    private drawSmth():void {
-        this.ctx.rect(10,10,200,200);
-        this.ctx.fill();
+    public getCanvasWidth():number {
+        return this.canvas.width;
+    }
+
+    public getCanvasHeight():number {
+        return this.canvas.height;
     }
 }
