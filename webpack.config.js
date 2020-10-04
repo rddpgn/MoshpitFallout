@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/main.ts',
@@ -10,9 +11,13 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: ['ts-loader'],
         exclude: /node_modules/,
       },
+      {
+        test: /.(?:jpg|gif|png)/g,
+        use: ['file-loader']
+      }
     ],
   },
   resolve: {
@@ -22,4 +27,11 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from:  './src/game/assets/graphics/*.png', to: './' },
+      ],
+    }),
+  ],
 };
