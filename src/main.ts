@@ -1,18 +1,12 @@
 import { GameEngine } from './engine/GameEngine';
-
-const config = {
-    canvasId: 'game-canvas',
-    canvasWidth: document.body.clientWidth,
-    canvasHeight: document.body.clientHeight,
-}
+import { GameConfig } from '../rdengine.config';
 
 const startGame:Function = function():void {
-    const gameCanvas:HTMLCanvasElement = document.getElementById(config.canvasId) as HTMLCanvasElement;
-    gameCanvas.width = config.canvasWidth;
-    gameCanvas.height = config.canvasHeight;
+    const gameCanvas:HTMLCanvasElement = document.getElementById(GameConfig.canvasConfig['canvasId']) as HTMLCanvasElement;
+    gameCanvas.width = GameConfig.canvasConfig['canvasWidth'];
+    gameCanvas.height = GameConfig.canvasConfig['canvasHeight'];
 
-    const gameCanvasContext:CanvasRenderingContext2D = gameCanvas.getContext('2d');
-    GameEngine.start(gameCanvas, gameCanvasContext);
+    GameEngine.start(gameCanvas, GameConfig);
 }
 
 startGame();

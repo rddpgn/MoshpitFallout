@@ -1,23 +1,23 @@
-import { GameEngineFacade } from "../GameEngineFacade";
+import { GameEngine } from "../GameEngine";
 import { GameObject } from "../gameObjects/GameObject";
-import { ResourceManager } from "../ResourceManager";
+import { ResourceManager } from "../resourceManager/ResourceManager";
 
 export class Renderer {
 
     private ctx:CanvasRenderingContext2D;
+    private canvas:HTMLCanvasElement;
 
-    constructor(ctx:CanvasRenderingContext2D) {
+    constructor(canvas:HTMLCanvasElement, ctx:CanvasRenderingContext2D) {
         this.ctx = ctx;
+        this.canvas = canvas;
     }
 
     public renderGameObjects(gameObjects:Set<GameObject>):void {
-        this.ctx.clearRect(0,0,GameEngineFacade.getCanvasWidth(),GameEngineFacade.getCanvasHeight());
+        this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
         let img = ResourceManager.getInstance().getImageFromResource("14589235.jpg");
 
         if (img) {
             this.ctx.drawImage(img, 0, 0);
         }
-
-        console.log(img);
     }
 }
