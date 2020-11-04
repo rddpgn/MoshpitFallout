@@ -1,3 +1,4 @@
+import { Sprite } from '../graphics/Sprite';
 import { GameObject } from './GameObject';
 
 export class GameObjectsController {
@@ -6,6 +7,12 @@ export class GameObjectsController {
 
     constructor() {
         
+    }
+
+    public instanceCreate(x:number, y:number, sprite:Sprite):GameObject {
+        let obj = new GameObject(x, y, sprite);
+        this.gameObjects.add(obj);
+        return obj;
     }
 
     public updateGameObjects():void {

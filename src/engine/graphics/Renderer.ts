@@ -1,4 +1,5 @@
 import { GameEngine } from "../GameEngine";
+import { GameEngineController } from "../GameEngineController";
 import { GameObject } from "../gameObjects/GameObject";
 import { ResourceManager } from "../resourceManager/ResourceManager";
 
@@ -14,10 +15,11 @@ export class Renderer {
 
     public renderGameObjects(gameObjects:Set<GameObject>):void {
         this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
-        let img = ResourceManager.getInstance().getImageFromResource("14589235.jpg");
 
-        if (img) {
-            this.ctx.drawImage(img, 0, 0);
-        }
+        gameObjects.forEach((obj:GameObject) => {
+            if (obj.sprite) {
+                this.ctx.drawImage(obj.sprite.image, obj.x, obj.y);
+            }
+        });
     }
 }

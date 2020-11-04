@@ -11,11 +11,11 @@ export class GameEngineController {
     private gameObjectsController:GameObjectsController;
     private config:GameConfig;
     
-    constructor(canvas:HTMLCanvasElement, ctx:CanvasRenderingContext2D, config:GameConfig) {
+    constructor(canvas:HTMLCanvasElement, ctx:CanvasRenderingContext2D, config:GameConfig, onLoadedCallback:Function) {
         this.canvas = canvas;
         this.config = config;
         this.renderer = new Renderer(canvas, ctx);
-        this.resourseManager = new ResourceManager();
+        this.resourseManager = new ResourceManager(onLoadedCallback);
         this.gameObjectsController = new GameObjectsController();
 
 
@@ -39,5 +39,9 @@ export class GameEngineController {
 
     public rm():ResourceManager {
         return this.resourseManager;
+    }
+
+    public gobjc():GameObjectsController {
+        return this.gameObjectsController;
     }
 }

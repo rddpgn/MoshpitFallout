@@ -34,3 +34,9 @@ export class ImageResourceLoader {
         }
     }
 }
+
+/*
+Возможно переписать на дженерики
+вынести onloadcallback
+именование поправить
+*/

@@ -1,23 +1,26 @@
 import { GameConfig } from "../../../rdengine.config";
+import { Sprite } from "../graphics/Sprite";
 import { ImageResourceLoader } from "./ImageResourceLoader";
 
 export class ResourceManager {
     
     private static instance:ResourceManager;
     private resourcesBitmap:Map<String, ImageBitmap> = new Map<String, ImageBitmap>();
+    private onLoadedCallback:Function;
 
-    constructor() {
+    constructor(onLoadedCallback:Function) {
         ResourceManager.instance = this;
+        this.onLoadedCallback = onLoadedCallback;
         new ImageResourceLoader(this.onAllTexturesLoaded.bind(this));
     }
 
     private onAllTexturesLoaded(loadedTextures:Array<object>):void {
         for(let resource of loadedTextures) {
-            this.makeSprite(resource);
+            this.makeBitmaps(resource);
         }
     }
 
-    private makeSprite(resource:object):void {
+    private makeBitmaps(resource:object):void {
         let resourceData:object = resource['json'];
         let resourceDataFrames:object = resourceData['frames'];
         let image:HTMLImageElement = resource['img'];
@@ -31,6 +34,17 @@ export class ResourceManager {
                 this.resourcesBitmap.set(frame = frame.replace('"', ''), imageBitmap);
             });
         }
+
+        this.onLoadedCallback();
+    }
+
+    public createSprite(linkage:string):Sprite {
+        let texture = this.resourcesBitmap.get(linkage);
+        
+        if (texture != null) {
+            return new Sprite(texture);
+        }
+        return null;
     }
 
     public static getInstance():ResourceManager {
@@ -44,9 +58,5 @@ export class ResourceManager {
 }
 
 /*
-    Отдельный файл конфигурации, где хранятся ссылки на ресурсы
-    Прогоняем по джсончикам ресурсов, создаем массив всех ресурсов
-    Относительно ресурсов создаем мапу с именем картинки и имейджбитмапой
-    Когда прогоняем ресурсы, создаем имейдж битмапы
-    Вся эта хуйня еще и через промисы работает
+
 */

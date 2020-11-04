@@ -1,16 +1,12 @@
 export class Sprite {
     
-    private image:ImageBitmap;
+    public readonly image:ImageBitmap;
 
-    constructor(spriteName:string) {
-
+    constructor(image:ImageBitmap) {
+        this.image = image;
     }
 
     public update():void {
-
-    }
-
-    private createSpriteFromResource(spriteName:string):void {
 
     }
 }
