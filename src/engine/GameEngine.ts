@@ -4,6 +4,7 @@ import { GameObject } from "./gameObjects/GameObject";
 import { GameObjectsController } from "./gameObjects/GameObjectsController";
 import { Sprite } from "./graphics/Sprite";
 import { ResourceManager } from "./resourceManager/ResourceManager";
+import { Scene } from "./sceneManager/Scene";
 
 export class GameEngine {
     private static engine:GameEngineController;
@@ -29,5 +30,13 @@ export class GameEngine {
 
     public static saveInstance(instance:GameObject):void {
         GameEngine.engine && GameEngine.engine.gobjc().saveInstance(instance);
+    }
+
+    public static addScene(sceneName:string, scene:Scene):void {
+        GameEngine.engine && GameEngine.engine.sceneManager.addScene(sceneName, scene);
+    }
+
+    public static initScene(sceneName:string):void {
+        GameEngine.engine && GameEngine.engine.sceneManager.initScene(sceneName);
     }
 }
