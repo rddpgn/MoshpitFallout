@@ -3,6 +3,7 @@ import { GameEngineController } from "./GameEngineController";
 import { GameObject } from "./gameObjects/GameObject";
 import { GameObjectsController } from "./gameObjects/GameObjectsController";
 import { Sprite } from "./graphics/Sprite";
+import { InputController } from "./inputController/InputController";
 import { ResourceManager } from "./resourceManager/ResourceManager";
 import { Scene } from "./sceneManager/Scene";
 
@@ -38,5 +39,9 @@ export class GameEngine {
 
     public static initScene(sceneName:string):void {
         GameEngine.engine && GameEngine.engine.sceneManager.initScene(sceneName);
+    }
+
+    public static getInputController():InputController {
+        return GameEngine.engine && GameEngine.engine.inputController;
     }
 }
