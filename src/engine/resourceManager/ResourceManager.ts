@@ -5,36 +5,16 @@ import { ImageResourceLoader } from "./ImageResourceLoader";
 export class ResourceManager {
     
     private static instance:ResourceManager;
-    private resourcesBitmap:Map<String, ImageBitmap> = new Map<String, ImageBitmap>();
+    private resourcesBitmap:Map<string, ImageBitmap> = new Map<string, ImageBitmap>();
     private onLoadedCallback:Function;
 
     constructor(onLoadedCallback:Function) {
         ResourceManager.instance = this;
         this.onLoadedCallback = onLoadedCallback;
-        new ImageResourceLoader(this.onAllTexturesLoaded.bind(this));
+        new ImageResourceLoader(this.onAllTexturesLoaded.bind(this), this.resourcesBitmap);
     }
 
     private onAllTexturesLoaded(loadedTextures:Array<object>):void {
-        for(let resource of loadedTextures) {
-            this.makeBitmaps(resource);
-        }
-    }
-
-    private makeBitmaps(resource:object):void {
-        let resourceData:object = resource['json'];
-        let resourceDataFrames:object = resourceData['frames'];
-        let image:HTMLImageElement = resource['img'];
-
-        for(let frame in resourceDataFrames) {
-            let data = resourceDataFrames[frame];
-            let dataFrame = data['frame'];
-
-            createImageBitmap(image, dataFrame['x'], dataFrame['y'], dataFrame['w'], dataFrame['h'])
-            .then((imageBitmap:ImageBitmap) => {
-                this.resourcesBitmap.set(frame = frame.replace('"', ''), imageBitmap);
-            });
-        }
-
         this.onLoadedCallback();
     }
 
@@ -51,7 +31,7 @@ export class ResourceManager {
         return ResourceManager.instance;
     }
     
-    public getImageFromResource(imageName:String):ImageBitmap {
+    public getImageFromResource(imageName:string):ImageBitmap {
         return this.resourcesBitmap.get(imageName);
     }
     

@@ -1,6 +1,7 @@
 import { GameConfig } from "../../rdengine.config";
 import { GameEngineController } from "./GameEngineController";
 import { GameObject } from "./gameObjects/GameObject";
+import { GameObjectsController } from "./gameObjects/GameObjectsController";
 import { Sprite } from "./graphics/Sprite";
 import { ResourceManager } from "./resourceManager/ResourceManager";
 
@@ -22,11 +23,11 @@ export class GameEngine {
         return GameEngine.engine && GameEngine.engine.getCanvasHeight();
     }
 
-    public static instanceCreate(x:number, y:number, sprite:Sprite ):GameObject {
-        return GameEngine.engine && GameEngine.engine.gobjc().instanceCreate(x, y, sprite);
-    }
-
     public static createSprite(linkage:string):Sprite {
         return GameEngine.engine && GameEngine.engine.rm().createSprite(linkage);
+    }
+
+    public static saveInstance(instance:GameObject):void {
+        GameEngine.engine && GameEngine.engine.gobjc().saveInstance(instance);
     }
 }

@@ -9,15 +9,14 @@ export class GameObjectsController {
         
     }
 
-    public instanceCreate(x:number, y:number, sprite:Sprite):GameObject {
-        let obj = new GameObject(x, y, sprite);
-        this.gameObjects.add(obj);
-        return obj;
+    //Вынести в конструктор GameObject
+    public saveInstance(instance:GameObject):void {
+        this.gameObjects.add(instance);
     }
 
-    public updateGameObjects():void {
+    public updateGameObjects(dt:number):void {
         this.gameObjects.forEach(element => {
-            element.update();
+            element.update(dt);
         });
     }
 

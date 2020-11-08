@@ -9,10 +9,16 @@ const startGame:Function = function():void {
 
     GameEngine.start(gameCanvas, GameConfig, function() {
         console.log('GameStarted');
-        setTimeout(() => {
-            let player:GameObject = GameEngine.instanceCreate(32, 32, GameEngine.createSprite('14589235.jpg'));
-        }, 1000);
+        let player:GameObject = new GameObject(32, 32, GameEngine.createSprite('14589235'));
     });
 }
 
 startGame();
+
+/*
+
+--Отображение загрузки
+Сцена
+Инпуты
+
+*/

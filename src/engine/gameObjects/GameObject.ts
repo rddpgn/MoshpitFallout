@@ -1,3 +1,4 @@
+import { GameEngine } from "../GameEngine";
 import { Sprite } from "../graphics/Sprite";
 
 export class GameObject {
@@ -10,9 +11,15 @@ export class GameObject {
         this.x = x;
         this.y = y;
         this.sprite = sprite;
+
+        GameEngine.saveInstance(this);
     }
 
-    public update():void {
+    public update(dt:number):void {
         
+    }
+
+    public postUpdate(dt:number):void {
+
     }
 }

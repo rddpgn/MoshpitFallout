@@ -23,7 +23,7 @@ export class GameEngineController {
     }
 
     private update():void {
-        this.gameObjectsController.updateGameObjects();
+        this.gameObjectsController.updateGameObjects(0);
         this.renderer.renderGameObjects(this.gameObjectsController.getGameObjectsSet());
 
         window.requestAnimationFrame(this.update.bind(this));
