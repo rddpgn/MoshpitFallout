@@ -1,52 +1,16 @@
-import { GameObject } from "../../gameObjects/GameObject";
-import { IInputCallback } from "../IInputCallback";
-import { IInputListener } from "../IInputListener";
+import { InputListener as InputListener } from "../InputListener";
 import { IKeyState } from "../IKeyState";
-import { InputController } from "../InputController";
 
-export class KeyboardListener implements IInputListener {
-
-    private clickListeners:Map<string, Set<IInputCallback>> = new Map<string, Set<IInputCallback>>();
-    private pressingListeners:Map<string, Set<IInputCallback>> = new Map<string, Set<IInputCallback>>();
-    private pressedListeners:Map<string, Set<IInputCallback>> = new Map<string, Set<IInputCallback>>();
-
-    private keyStates:Map<string, IKeyState> = new Map<string, IKeyState>();
+export class KeyboardListener extends InputListener {
 
     constructor() {
+        super();
         addEventListener('keydown', (e) => this.onButtonClickUpdate.call(this, e));
         addEventListener('keyup', (e) => this.onButtonPressedUpdate.call(this, e));
     }
 
     public update():void {
         this.onButtonPressingUpdate();
-    }
-
-    private executeCallbacks(callbacksSet:Set<IInputCallback>):void {
-        callbacksSet.forEach((callbackObj:IInputCallback) => {
-            if (callbackObj.context) {
-                callbackObj.callback.call(callbackObj.context);
-            } else {
-                callbacksSet.delete(callbackObj);
-            }
-        });
-    }
-
-    public onButtonClick(button:string, context:GameObject, callback:() => void):void {
-        if (!this.keyStates.get(button)) {
-            this.keyStates.set(button, {
-                keyDown: false,
-                keyUp: false,
-            })
-        }
-        
-        if (!this.clickListeners.get(button)) {
-            this.clickListeners.set(button, new Set<IInputCallback>());
-        }
-
-        this.clickListeners.get(button).add({
-            callback,
-            context,
-        });
     }
 
     private onButtonClickUpdate(e:KeyboardEvent) {
@@ -60,17 +24,6 @@ export class KeyboardListener implements IInputListener {
             keyState.keyUp = false;
         }
     }
-    
-    public onButtonPressing(button:string, context:GameObject, callback:() => void):void {
-        if (!this.pressingListeners.get(button)) {
-            this.pressingListeners.set(button, new Set<IInputCallback>());
-        }
-
-        this.pressingListeners.get(button).add({
-            callback,
-            context,
-        });
-    }
 
     private onButtonPressingUpdate():void {
         this.keyStates.forEach((keyState:IKeyState, key:string) => {
@@ -79,24 +32,6 @@ export class KeyboardListener implements IInputListener {
             }
         });
     } 
-    
-    public onButtonPressed(button:string, context:GameObject, callback:() => void):void {
-        if (!this.keyStates.get(button)) {
-            this.keyStates.set(button, {
-                keyDown: false,
-                keyUp: false,
-            })
-        }
-
-        if (!this.pressedListeners.get(button)) {
-            this.pressedListeners.set(button, new Set<IInputCallback>());
-        }
-
-        this.pressedListeners.get(button).add({
-            callback,
-            context,
-        });
-    }
 
     private onButtonPressedUpdate(e:KeyboardEvent) {
         let keyState:IKeyState = this.keyStates.get(e.code);
