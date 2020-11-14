@@ -26,6 +26,8 @@ export class InputListener {
     }
 
     public onButtonPressing(button:string, context:object, callback:() => void):void {
+        this.setKeyState(button, false, false);
+        
         if (!this.pressingListeners.get(button)) {
             this.pressingListeners.set(button, new Set<IInputCallback>());
         }
