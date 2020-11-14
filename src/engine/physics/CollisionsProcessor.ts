@@ -17,10 +17,15 @@ export class CollisionsProcessor {
         });
 
         resultPoints.sort((edgeA:Point, edgeB:Point) => {
-            return Point.subStractPoints(edgeA, line.lineStart).getLenght() - Point.subStractPoints(edgeB, line.lineStart).getLenght();
+            return CollisionsProcessor.calcPointPseudoLenght(Point.subStractPoints(edgeA, line.lineStart)) - 
+                   CollisionsProcessor.calcPointPseudoLenght(Point.subStractPoints(edgeB, line.lineStart));
         });
 
         return resultPoints[0];
+    }
+
+    private static calcPointPseudoLenght(point:Point):number {
+        return Math.sqrt(point.x * point.x + point.y * point.y);
     }
 
 

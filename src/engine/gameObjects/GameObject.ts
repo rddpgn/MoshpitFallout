@@ -1,17 +1,15 @@
 import { GameEngine } from "../GameEngine";
 import { Sprite } from "../graphics/Sprite";
+import { Point } from "../math/Point";
 
 export class GameObject {
 
-    public x:number;
-    public y:number;
+    public position:Point = new Point();
     public sprite:Sprite;
 
-
-    constructor(x:number, y:number, sprite:Sprite) {
-        this.x = x;
-        this.y = y;
-        this.sprite = sprite;
+    constructor(x:number, y:number) {
+        this.position.x = x;
+        this.position.y = y;
 
         GameEngine.saveInstance(this);
     }

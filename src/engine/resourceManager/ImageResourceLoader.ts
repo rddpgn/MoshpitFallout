@@ -49,7 +49,8 @@ export class ImageResourceLoader {
             let createImageBitmapPromise = new Promise((resolve, reject) => {
                 createImageBitmap(image, dataFrame['x'], dataFrame['y'], dataFrame['w'], dataFrame['h'])
                 .then((imageBitmap) => resolve({ 
-                    frame: frame.replace('"', '').replace('.jpg', ''), 
+                    //TODO Сделать через нормальные регулярки
+                    frame: frame.replace('"', '').replace('.jpg', '').replace('.png', ''), 
                     imageBitmap
                 }));
             });

@@ -52,13 +52,17 @@ export class GameEngine {
         GameEngine.engine && GameEngine.engine.renderer.addLine(line);
     }
 
+
+    //Todo не работает нихуя, нужно прям полигон в ренедрер прокидывать
     public static drawPolygon(polygon:Polygon):void {
-        if (GameEngine) {
-            polygon.relativeForm.forEach((line:Line) => GameEngine.drawLine(line));
-        }
+        GameEngine.engine && GameEngine.engine.renderer.addPoly(polygon);
     }
 
     public static drawCircle(circle:Circle):void {
         GameEngine.engine && GameEngine.engine.renderer.addCircle(circle);
+    }
+
+    public static drawLineOnce(line:Line):void {
+        GameEngine.engine && GameEngine.engine.renderer.drawLineOnce(line);
     }
 }
