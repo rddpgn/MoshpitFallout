@@ -14,5 +14,4 @@ export class Line {
         return Math.sqrt((this.lineStart.x - this.lineEnd.x) * (this.lineStart.x - this.lineEnd.x) + 
                          (this.lineStart.y - this.lineEnd.y) * (this.lineStart.y - this.lineEnd.y));
     }
-   
 }
