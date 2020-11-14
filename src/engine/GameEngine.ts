@@ -4,6 +4,7 @@ import { GameObject } from "./gameObjects/GameObject";
 import { GameObjectsController } from "./gameObjects/GameObjectsController";
 import { Sprite } from "./graphics/Sprite";
 import { InputController } from "./inputController/InputController";
+import { Circle } from "./math/Circle";
 import { Line } from "./math/Line";
 import { Polygon } from "./math/Polygon";
 import { ResourceManager } from "./resourceManager/ResourceManager";
@@ -55,5 +56,9 @@ export class GameEngine {
         if (GameEngine) {
             polygon.relativeForm.forEach((line:Line) => GameEngine.drawLine(line));
         }
+    }
+
+    public static drawCircle(circle:Circle):void {
+        GameEngine.engine && GameEngine.engine.renderer.addCircle(circle);
     }
 }

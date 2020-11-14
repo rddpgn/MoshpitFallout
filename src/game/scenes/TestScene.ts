@@ -1,6 +1,7 @@
 import { GameEngine } from "../../engine/GameEngine";
 import { GameEngineController } from "../../engine/GameEngineController";
 import { GameObject } from "../../engine/gameObjects/GameObject";
+import { Circle } from "../../engine/math/Circle";
 import { Line } from "../../engine/math/Line";
 import { Point } from "../../engine/math/Point";
 import { Polygon } from "../../engine/math/Polygon";
@@ -27,6 +28,9 @@ export class TestScene extends Scene {
 
         let line = new Line(new Point(0,0), new Point(500,500));
         GameEngine.drawLine(line);
+
+        let circle = new Circle(GameEngine.getInputController().getMousePosition(), 8);
+        GameEngine.drawCircle(circle);
 
     }
 }
