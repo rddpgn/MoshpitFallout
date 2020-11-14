@@ -3,6 +3,10 @@ export class Scene {
 
     }
 
+    public update():void {
+        
+    }
+
     public init():void {
 
     }

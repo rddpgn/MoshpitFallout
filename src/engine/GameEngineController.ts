@@ -31,6 +31,7 @@ export class GameEngineController {
 
     private update():void {
         this.inputController.update();
+        this.sceneManager.update();
         this.gameObjectsController.updateGameObjects(0);
         this.renderer.renderGameObjects(this.gameObjectsController.getGameObjectsSet());
 
