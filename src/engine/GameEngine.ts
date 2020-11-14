@@ -4,6 +4,8 @@ import { GameObject } from "./gameObjects/GameObject";
 import { GameObjectsController } from "./gameObjects/GameObjectsController";
 import { Sprite } from "./graphics/Sprite";
 import { InputController } from "./inputController/InputController";
+import { Line } from "./math/Line";
+import { Polygon } from "./math/Polygon";
 import { ResourceManager } from "./resourceManager/ResourceManager";
 import { Scene } from "./sceneManager/Scene";
 
@@ -43,5 +45,15 @@ export class GameEngine {
 
     public static getInputController():InputController {
         return GameEngine.engine && GameEngine.engine.inputController;
+    }
+
+    public static drawLine(line:Line):void {
+        GameEngine.engine && GameEngine.engine.renderer.addLine(line);
+    }
+
+    public static drawPolygon(polygon:Polygon):void {
+        if (GameEngine) {
+            polygon.relativeForm.forEach((line:Line) => GameEngine.drawLine(line));
+        }
     }
 }

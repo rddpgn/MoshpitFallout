@@ -9,7 +9,7 @@ import { SceneManager } from './sceneManager/SceneManager';
 
 export class GameEngineController {    
     private canvas:HTMLCanvasElement;
-    private renderer:Renderer;
+    public readonly renderer:Renderer;
     private resourseManager:ResourceManager;
     private gameObjectsController:GameObjectsController;
     private config:GameConfig;
