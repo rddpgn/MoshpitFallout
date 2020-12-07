@@ -3,6 +3,7 @@ import { GameEngine } from './GameEngine';
 import { GameObjectsController } from './gameObjects/GameObjectsController';
 import { Renderer } from './graphics/Renderer';
 import { InputController } from './inputController/InputController';
+import { CollisionController } from './physics/CollisionController';
 import { ResourceManager } from './resourceManager/ResourceManager';
 import { Scene } from './sceneManager/Scene';
 import { SceneManager } from './sceneManager/SceneManager';
@@ -15,6 +16,7 @@ export class GameEngineController {
     private config:GameConfig;
     public readonly sceneManager:SceneManager;
     public readonly inputController:InputController;
+    public readonly collisionController:CollisionController;
 
     
     constructor(canvas:HTMLCanvasElement, ctx:CanvasRenderingContext2D, config:GameConfig, onLoadedCallback:Function) {
@@ -25,6 +27,7 @@ export class GameEngineController {
         this.gameObjectsController = new GameObjectsController();
         this.sceneManager = new SceneManager();
         this.inputController = new InputController();
+        this.collisionController = new CollisionController(this.gameObjectsController);
 
         this.update();
     }

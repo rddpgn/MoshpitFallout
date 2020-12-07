@@ -7,6 +7,7 @@ import { InputController } from "./inputController/InputController";
 import { Circle } from "./math/Circle";
 import { Line } from "./math/Line";
 import { Polygon } from "./math/Polygon";
+import { CollisionController } from "./physics/CollisionController";
 import { ResourceManager } from "./resourceManager/ResourceManager";
 import { Scene } from "./sceneManager/Scene";
 
@@ -52,8 +53,6 @@ export class GameEngine {
         GameEngine.engine && GameEngine.engine.renderer.addLine(line);
     }
 
-
-    //Todo не работает нихуя, нужно прям полигон в ренедрер прокидывать
     public static drawPolygon(polygon:Polygon):void {
         GameEngine.engine && GameEngine.engine.renderer.addPoly(polygon);
     }
@@ -64,5 +63,9 @@ export class GameEngine {
 
     public static drawLineOnce(line:Line):void {
         GameEngine.engine && GameEngine.engine.renderer.drawLineOnce(line);
+    }
+
+    public static getCollisionController():CollisionController {
+        return GameEngine.engine && GameEngine.engine.collisionController;
     }
 }

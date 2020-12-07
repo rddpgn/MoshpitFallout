@@ -7,8 +7,8 @@ export class Vector extends Point {
     }
 
     public expand(value:number):Vector {
-        this.x * value;
-        this.y * value;
+        this.x *= value;
+        this.y *= value;
         return this;
     }
 
